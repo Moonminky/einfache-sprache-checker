@@ -1,0 +1,96 @@
+/* reset code and common starts here */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+:root {
+  --border-radius: 16px;
+  --font-family-primary: "Helvetica", sans-serif;
+  --font-weight-primary: 400;
+  --color-background: #f5e9e9;
+  --color-font: #360036;
+}
+
+.App {
+  background-color: var(--color-background);
+  color: var(--color-font);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-primary);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.textanalysis {
+  margin: 20px;
+  width: 100%;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+}
+/* reset code and common ends here */
+
+/* TextInput starts here */
+.textinput {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  width:50%;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 40px;
+}
+
+textarea {
+  width: 100%;
+  min-width: 400px;
+  height: 350px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid var(--color-font);
+  border-radius: var(--border-radius);
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+.submit {
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid var(--color-background);
+  border-radius: var(--border-radius);
+  background-color: var(--color-font);
+  color: #f8f8f8;
+  font-size: 16px;
+  cursor: pointer;
+}
+/* TextInput ends here */
+
+/* AnalysisResult starts here */
+.analysisresult {
+  align-content: center;
+  justify-content: center;
+}
+
+ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 100px 20px;
+  font-size: 20px;
+}
+
+li {
+  text-align: start;
+}
+/* AnalysisResult ends here */
