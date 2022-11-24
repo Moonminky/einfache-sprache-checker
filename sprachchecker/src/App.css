@@ -27,36 +27,28 @@
 }
 
 .textanalysis {
-  margin: 20px;
-  width: 100%;
-  align-self: center;
+  margin: 20px 20px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
 }
 /* reset code and common ends here */
 
+/* header starts here */
+h1 {
+  margin: 20px;
+  font-size: 45px;
+}
+/* header ends here */
+
 /* TextInput starts here */
-.textinput {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-}
-
-form {
-  width:50%;
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 40px;
-}
-
 textarea {
   width: 100%;
   min-width: 400px;
   height: 350px;
   padding: 12px 20px;
-  box-sizing: border-box;
   border: 2px solid var(--color-font);
   border-radius: var(--border-radius);
   background-color: #f8f8f8;
@@ -66,7 +58,6 @@ textarea {
 
 .submit {
   padding: 12px 20px;
-  box-sizing: border-box;
   border: 2px solid var(--color-background);
   border-radius: var(--border-radius);
   background-color: var(--color-font);
@@ -77,9 +68,11 @@ textarea {
 /* TextInput ends here */
 
 /* AnalysisResult starts here */
-.analysisresult {
-  align-content: center;
-  justify-content: center;
+
+.result {
+  border: 2px solid var(--color-font);
+  border-radius: var(--border-radius);
+  background-color: #f8f8f8;
 }
 
 ul {
@@ -87,7 +80,7 @@ ul {
   display: flex;
   flex-direction: column;
   margin: 100px 20px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 li {

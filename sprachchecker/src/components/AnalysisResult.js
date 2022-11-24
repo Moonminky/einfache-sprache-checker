@@ -2,7 +2,7 @@ import React from "react";
 
 const AnalysisResult = () => {
   return (
-    <div>
+    <div className="result">
       <ul>
           <li><icon>x</icon> Goethe-Level</li>
           <li><icon>x</icon> Verneinung mit "nicht"</li>
