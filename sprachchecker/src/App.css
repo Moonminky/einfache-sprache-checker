@@ -14,6 +14,13 @@
   --font-weight-primary: 400;
   --color-background: #f5e9e9;
   --color-font: #360036;
+  --color-hover: #5c015c;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 .App {
@@ -24,6 +31,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .textanalysis {
@@ -33,10 +41,17 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: flex-start;
+  padding-bottom: 5rem;
+  padding-top: 3rem;
 }
 /* reset code and common ends here */
 
 /* header starts here */
+.header {
+  background-color: var(--color-font);
+  color: var(--color-background);
+  width: 100%;
+}
 h1 {
   margin: 20px;
   font-size: 45px;
@@ -48,7 +63,7 @@ textarea {
   width: 100%;
   min-width: 400px;
   height: 350px;
-  padding: 12px 20px;
+  padding: 20px;
   border: 2px solid var(--color-font);
   border-radius: var(--border-radius);
   background-color: #f8f8f8;
@@ -65,21 +80,27 @@ textarea {
   font-size: 16px;
   cursor: pointer;
 }
+
+.submit:hover {
+  background-color: var(--color-hover);
+}
 /* TextInput ends here */
 
 /* AnalysisResult starts here */
 
 .result {
+  min-width: 400px;
+  height: 350px;
   border: 2px solid var(--color-font);
   border-radius: var(--border-radius);
   background-color: #f8f8f8;
+  padding: 20px;
 }
 
 ul {
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 100px 20px;
   font-size: 18px;
 }
 
@@ -87,3 +108,20 @@ li {
   text-align: start;
 }
 /* AnalysisResult ends here */
+
+/* Footer starts here */
+.footer {
+  background-color: var(--color-font);
+  color: var(--color-background);
+  width: 100%;
+  height: 5rem;
+  position: fixed;
+  bottom: 0;
+  padding: 20px;
+}
+
+.footer a {
+  text-decoration: underline;
+  color: #f5d5d5;
+}
+/* Footer ends here */
