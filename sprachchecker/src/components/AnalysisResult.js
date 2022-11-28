@@ -1,16 +1,18 @@
 import React from "react";
+import DangerousIcon from '@mui/icons-material/Dangerous';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const AnalysisResult = () => {
   return (
     <div className="result">
       <ul>
-          <li><icon>x</icon> Goethe-Level</li>
-          <li><icon>x</icon> Verneinung mit "nicht"</li>
-          <li><icon>x</icon> Satzzeichen</li>
-          <li><icon>x</icon> Zahlen</li>
-          <li><icon>x</icon> Satzlänge</li>
-          <li><icon>x</icon> Konjuktiv</li>
-          <li><icon>x</icon> Passiv</li>
+          <li id="goethe" className="pass"><DangerousIcon/> Goethe-Level</li>
+          <li id="not" className="fail"><DangerousIcon/> Verneinung mit "nicht"</li>
+          <li id="punctuation" className="fail"><DangerousIcon/> Satzzeichen</li>
+          <li id="numbers" className="pass"><DangerousIcon/> Zahlen</li>
+          <li id="sentencelength" className="fail"><DangerousIcon/> Satzlänge</li>
+          <li id="subjunctive" className="fail"><DangerousIcon/> Konjuktiv</li>
+          <li id="passive" className="fail"><DangerousIcon/> Passiv</li>
       </ul>
     </div>
   );

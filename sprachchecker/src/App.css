@@ -101,11 +101,25 @@ ul {
   width: 100%;
   display: flex;
   flex-direction: column;
-  font-size: 18px;
+  font-size: 1.5rem ;
+}
+
+DangerousIcon {
+  vertical-align: bottom;
 }
 
 li {
+  display: inline-block;
   text-align: start;
+  justify-content: center;
+}
+
+.fail {
+  color: red;
+}
+
+.pass {
+  color: green;
 }
 /* AnalysisResult ends here */
 
