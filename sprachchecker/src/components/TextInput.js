@@ -10,7 +10,6 @@ const TextInput = ({ onSend }) => {
     if (!text) {
       alert("Please add some text first!");
     }
-    console.log(text);
     onSend({ text });
 
     // setText("");
