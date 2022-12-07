@@ -25,7 +25,8 @@ def negation_analysis(input_text):
 def punctuation_analysis(input_doc):
     """This method takes in a spacy.doc and checks it for 'complicated' punctuations,
     meaning anything but full stop, comma, question mark and colon.
-    If complicated punctuation is found, it is added to the token_list, which the method returns (later, for now just pass or fail).
+    If complicated punctuation is found, it is added to the token_list, which the method returns 
+    (later, for now just pass or fail).
     """
     # TODO: possibly replace with regex-check on string directly, as spacy doesn't seem to recognize stuff like "wo-" as punct
     easy_punct = ['.', ',', '?', ':']
@@ -118,11 +119,11 @@ def passive_analysis(input_doc):
     sent_indices = []
     for sent in input_doc.sents:
         print("ents:", sent.ents)
-        # extract morhoplogical info for subject
+        # extract morphological info for subject
         subject = [token.morph for token in sent if token.dep_ == "sb"]
         subject_num_pers = (subject[0].get("Number"), subject[0].get("Person"))
         print("subject_num_pers: ", subject_num_pers)
-        # extract morhoplogical info for possible auxiliary verb
+        # extract morphological info for possible auxiliary verb
         verb = [token.morph for token in sent if token.pos_ == "AUX"]
         verb_num_pers = (verb[0].get("Number"), verb[0].get("Person"))
         print("verb_num_pers: ", verb_num_pers)
@@ -136,7 +137,7 @@ def passive_analysis(input_doc):
 
 def check_text(text_input):
     """Run all checks & return checks list"""
-    doc = nlp(text_input)
+    doc = nlp(text_input.replace("\n",""))
     print("doc text: ", doc.text)
     # for token in doc:
     #     #print(token.text, spacy.explain(token.dep_), token.pos_, spacy.explain(token.tag_), token.lemma_, token.morph)
