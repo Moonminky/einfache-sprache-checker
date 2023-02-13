@@ -87,13 +87,15 @@ def language_level_analysis(input_doc, level):
         level_words = levels.a1
     elif level == 'a2':
         level_words = levels.a2
+    elif Level == 'b1':
+        level_words = levels.b1
     word_list = [
         token.text for token in input_doc if not token.is_punct and not token.is_stop and token.text not in level_words]
     print(level, "level word_list:", word_list)
     # return word_list
     if len(word_list) > 0:
         return "fail"
-    else: 
+    else:
         return "pass"
 
 
