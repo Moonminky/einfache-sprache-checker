@@ -59,9 +59,10 @@ h1 {
 /* header ends here */
 
 /* TextInput starts here */
-textarea {
+.textarea {
   width: 100%;
   min-width: 400px;
+  max-width: 500px;
   height: 350px;
   padding: 20px;
   border: 2px solid var(--color-font);
@@ -69,6 +70,8 @@ textarea {
   background-color: #f8f8f8;
   font-size: 16px;
   resize: none;
+  white-space: wrap;
+  overflow: auto;
 }
 
 .submit {
@@ -122,6 +125,24 @@ li {
   color: green;
 }
 /* AnalysisResult ends here */
+
+/* TextOutput starts here */
+.textoutput {
+  width: 100%;
+  min-width: 400px;
+  height: 350px;
+  padding: 20px;
+  border: 2px solid var(--color-font);
+  border-radius: var(--border-radius);
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+.highlighted {
+  background-color: pink;
+  color: black;
+}
+/* TextOutput starts here */
 
 /* Footer starts here */
 .footer {

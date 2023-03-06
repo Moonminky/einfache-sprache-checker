@@ -8,14 +8,17 @@ import goethe_levels as levels
 
 nlp = spacy.load('de_core_news_sm')
 
+highlight_words = []
+
 #  Check für Verneinung mit "nicht"
 def negation_analysis(input_text):
     """This method takes in an input text and scans it for occurrences of the word 'nicht'.
-    If found, it returns the indices of the word, otherwise it returns false (later for now just returns pass or fail)"""
+    If found, it adds the indices of the word to the highlight_words list, otherwise it returns false"""
     if "nicht" in input_text:
         print("negation_analysis: ", [m.start()
               for m in re.finditer('nicht', input_text)])
-        # return [m.start() for m in re.finditer('nicht', input_text)]
+        highlight_words.extend([m.start() for m in re.finditer('nicht', input_text)])
+        print("highlight words: ",highlight_words)
         return "fail"
     else:
         return "pass"
@@ -33,6 +36,7 @@ def punctuation_analysis(input_doc):
     # for each PUNCT in input, check if it's an easy PUNCT
     # if it's not, return index
     token_list = []
+    #TODO: Get token index and highlight
     for token in input_doc:
         if token.pos_ == "PUNCT" and token.text not in easy_punct:
             print(token)
@@ -141,6 +145,7 @@ def check_text(text_input):
     """Run all checks & return checks list"""
     doc = nlp(text_input.replace("\n",""))
     print("doc text: ", doc.text)
+    highlight_words = []
     # for token in doc:
     #     #print(token.text, spacy.explain(token.dep_), token.pos_, spacy.explain(token.tag_), token.lemma_, token.morph)
     #     print(token.text, spacy.explain(token.dep_))
