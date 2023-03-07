@@ -8,7 +8,24 @@ import goethe_levels as levels
 
 nlp = spacy.load('de_core_news_sm')
 
-highlight_words = []
+neg_highlights = [] #index-based
+punctuation_highlights= [] #character-based, look up character
+goethe_highlights = []#character-based, look up substring
+num_highlights =[] #character-based, look up substring
+sentence_len_highlights = [] #index and character-based, need to use index to avoid accidental duplication bcos whole sentence
+subjunctive_highlights = [] # character-based, look up substring
+passive_highlights = [] #index and character-based, need to use index to avoid accidental duplication bcos whole sentence
+
+highlights = [
+        {'neg_highlights': neg_highlights}, #index-based
+        {'punctuation_highlights': punctuation_highlights},#character-based, look up character
+        {'goethe_highlights':goethe_highlights}, #character-based, look up substring
+        {'num_highlights': num_highlights}, #character-based, look up substring
+        {'sentence_len_highlights': sentence_len_highlights}, #index and character-based- use index bcos whole sentence
+        {'subjunctive_highlights': subjunctive_highlights}, #character-based, look up substring
+        {'passive_highlights': passive_highlights}  #index and character-based- use index bcos whole sentence
+    ]
+
 
 #  Check für Verneinung mit "nicht"
 def negation_analysis(input_text):
@@ -17,8 +34,8 @@ def negation_analysis(input_text):
     if "nicht" in input_text:
         print("negation_analysis: ", [m.start()
               for m in re.finditer('nicht', input_text)])
-        highlight_words.extend([m.start() for m in re.finditer('nicht', input_text)])
-        print("highlight words: ",highlight_words)
+        neg_highlights.extend([(m.start(), m.start()+5) for m in re.finditer('nicht', input_text)])
+        print("neg_highlights: ", neg_highlights)
         return "fail"
     else:
         return "pass"
@@ -28,21 +45,20 @@ def negation_analysis(input_text):
 def punctuation_analysis(input_doc):
     """This method takes in a spacy.doc and checks it for 'complicated' punctuations,
     meaning anything but full stop, comma, question mark and colon.
-    If complicated punctuation is found, it is added to the token_list, which the method returns 
-    (later, for now just pass or fail).
+    If complicated punctuation is found, it is added to the punctuation_highlights
+    Then the method returns pass or fail.
     """
     # TODO: possibly replace with regex-check on string directly, as spacy doesn't seem to recognize stuff like "wo-" as punct
     easy_punct = ['.', ',', '?', ':']
     # for each PUNCT in input, check if it's an easy PUNCT
     # if it's not, return index
-    token_list = []
     #TODO: Get token index and highlight
     for token in input_doc:
         if token.pos_ == "PUNCT" and token.text not in easy_punct:
             print(token)
-            token_list.append(token)
-    print("token_list:", token_list)
-    if len(token_list) > 0:
+            punctuation_highlights.append(token.text)
+    print("punctuation_highlights", punctuation_highlights)
+    if len(punctuation_highlights) > 0:
         return "fail"
     else: 
         return "pass"
@@ -52,12 +68,11 @@ def punctuation_analysis(input_doc):
 def numbers_analysis(input_doc):
     """Takes in a spacy.doc and checks for any numericals.
     If it finds them and they are written as word, it adds them to the num_list, which the method returns."""
-    num_list = []
     for token in input_doc:
         if token.pos_ == "NUM" and token.shape_[0] != 'd':
-            num_list.append(token)
-    print("num_list: ", num_list)
-    if len(num_list) > 0:
+            num_highlights.append(token.text)
+    print("num_highlights: ", num_highlights)
+    if len(num_highlights) > 0:
         return "fail"
     else: 
         return "pass"
@@ -66,16 +81,16 @@ def numbers_analysis(input_doc):
 # Check für Satzlänge
 def sentence_length_analysis(input_doc):
     """Takes in a spacy.doc and checks for sentences longer as 12 words.
-    Returns a list of tuples with sentence_start_index and sentence_end_index
-    (later, for now just pass or fail)"""
-    sent_indices = []
+    Creates a list of tuples with sentence_start_index and sentence_end_index
+    and returns pass or fail"""
     for sent in input_doc.sents:
         length = len([token.text for token in sent if not token.is_punct])
         if length > 12:
             print("too long! ", (sent, sent.start, sent.end))
-            sent_indices.append((sent.start, sent.end))
+            sentence_len_highlights.append((sent.start, sent.end))
     # return sent_indices
-    if len(sent_indices) > 0:
+    print("sentence_len_highlights", sentence_len_highlights)
+    if len(sentence_len_highlights) > 0:
         return "fail"
     else: 
         return "pass"
@@ -85,8 +100,7 @@ def sentence_length_analysis(input_doc):
 # Check für Goethe-Sprachlevel
 def language_level_analysis(input_doc, level):
     """Takes in a spacy.doc and a language level string, ie 'B1', 'B2' to find any words that are not appropriate
-    for the specified language level. Returns a list of indices for the found words.
-    (later, for now just pass or fail)"""
+    for the specified language level. Creates a list with found words and returns pass or fail"""
     if level == 'a1':
         level_words = levels.a1
     elif level == 'a2':
@@ -96,6 +110,8 @@ def language_level_analysis(input_doc, level):
     word_list = [
         token.text for token in input_doc if not token.is_punct and not token.is_stop and token.text not in level_words]
     print(level, "level word_list:", word_list)
+    goethe_highlights.extend(word_list)
+    print("goethe_highlights", goethe_highlights)
     # return word_list
     if len(word_list) > 0:
         return "fail"
@@ -105,12 +121,12 @@ def language_level_analysis(input_doc, level):
 
 # Check für Konjunktiv
 def subjunctive_analysis(input_doc):
-    """Takes in a spacy.doc and checks for any words with subjunctive mood. Returns a list of found words.
-    (later, for now just pass or fail)"""
-    word_list = [
-        token.text for token in input_doc if "Mood=Sub" in token.morph]
-    print("sub_list: ", word_list)
-    if len(word_list) > 0:
+    """Takes in a spacy.doc and checks for any words with subjunctive mood. Makes a list of found words.
+    and returns pass or fail)"""
+    subj_words = [token.text for token in input_doc if "Mood=Sub" in token.morph]
+    subjunctive_highlights.extend(subj_words)
+    print("subjunctive_highlights in method: ", subjunctive_highlights)
+    if len(subjunctive_highlights) > 0:
         return "fail"
     else: 
         return "pass"
@@ -141,17 +157,40 @@ def passive_analysis(input_doc):
         #   sent_indices.append((sent.start, sent.end))
     # return sent_indices
 
+def deduplicate_list(to_dedup):
+    """Takes in a list and returns it without duplicate values"""
+    # Convert the list to a set to remove duplicates
+    my_set = set(to_dedup)
+
+    # Convert the set back to a list
+    deduplicated_list = list(my_set)
+
+    return(deduplicated_list)
+
+
+def make_highlights(neg_highlights, punctuation_highlights, goethe_highlights, num_highlights, sentence_len_highlights, subjunctive_highlights, passive_highlights):
+    highlights = [
+        {'neg_highlights': deduplicate_list(neg_highlights)}, #index-based
+        {'punctuation_highlights': deduplicate_list(punctuation_highlights)},#character-based, look up character
+        {'goethe_highlights': deduplicate_list(goethe_highlights)}, #character-based, look up substring
+        {'num_highlights': deduplicate_list(num_highlights)}, #character-based, look up substring
+        {'sentence_len_highlights': deduplicate_list(sentence_len_highlights)}, #index and character-based- use index bcos whole sentence
+        {'subjunctive_highlights': deduplicate_list(subjunctive_highlights)}, #character-based, look up substring
+        {'passive_highlights': deduplicate_list(passive_highlights)}  #index and character-based- use index bcos whole sentence
+    ]
+    return highlights
+
 def check_text(text_input):
     """Run all checks & return checks list"""
     doc = nlp(text_input.replace("\n",""))
     print("doc text: ", doc.text)
-    highlight_words = []
     # for token in doc:
     #     #print(token.text, spacy.explain(token.dep_), token.pos_, spacy.explain(token.tag_), token.lemma_, token.morph)
     #     print(token.text, spacy.explain(token.dep_))
     checks = [
-                {'name': 'Goethe-Level',
-                'result': language_level_analysis(doc, 'a1')
+                {
+                    'name': 'Goethe-Level',
+                    'result': language_level_analysis(doc, 'a1')
                 },
                 {
                     'name': 'Verneinung',
@@ -178,4 +217,6 @@ def check_text(text_input):
                 #     'result': passive_analysis(doc)
                 # }
                 ]
+    make_highlights(neg_highlights, punctuation_highlights, goethe_highlights, num_highlights, sentence_len_highlights, subjunctive_highlights, passive_highlights)
+    print(highlights)
     return checks

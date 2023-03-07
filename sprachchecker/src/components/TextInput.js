@@ -66,20 +66,32 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
     }
   };
 
-  const renderText = (submittedText, highlightIndices) => {
-    if (!submittedText || !highlightIndices) {
+  const renderText = (submittedText, highlights) => {
+    if (!submittedText || !highlights) {
       return '';
     } else {
+      //get indexed Highlights
+      //TODO: make dynamic for all index based highlights
+      let highlightIndices = highlights[0].neg_highlights;
+      console.log("neg_highlights in renderText", highlightIndices)
+      //make list of words to highlight
+
       // Split text into an array of words
-      const words = submittedText.split(/\s+|\b/);
+      console.log(submittedText);
+      const words = submittedText.match(/[\p{Letter}\p{Mark}\p{Punctuation}\p{Other_Punctuation}\p{Connector_Punctuation}yarn ]+/gu);
+      console.log("split words: ",words);
 
       // Map over words and add highlight class to highlighted words
-      let highlightEndIndex = -1;
+      //TODO: fix hardcoded index generation
+      let highlightStartIndex = highlightIndices[0];
+      let highlightEndIndex = highlightIndices[1];
+      console.log("highlightIndeces", (highlightStartIndex, highlightEndIndex))
+
       return words.map((word, index) => {
         const wordStartIndex = submittedText.indexOf(word, highlightEndIndex + 1);
         const wordEndIndex = wordStartIndex + word.length;
         highlightEndIndex = Math.max(highlightEndIndex, wordEndIndex - 1);
-        const shouldHighlight = highlightIndices ? highlightIndices.includes(wordStartIndex) : false;
+        const shouldHighlight = highlightStartIndex ? highlightStartIndex == wordStartIndex && highlightEndIndex == wordEndIndex: false;
         const className = shouldHighlight ? 'highlighted' : '';
         return (
           `<span class="${className}">${word} </span>`
