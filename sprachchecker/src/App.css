@@ -40,7 +40,7 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  align-items: flex-start;
+  align-items: center;
   padding-bottom: 5rem;
   padding-top: 3rem;
 }
@@ -59,6 +59,16 @@ h1 {
 /* header ends here */
 
 /* TextInput starts here */
+
+.glevel {
+  display:inline-block;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  justify-items: center;
+  justify-self: flex-start;
+}
+
 .textarea {
   width: 100%;
   min-width: 400px;
@@ -72,9 +82,11 @@ h1 {
   resize: none;
   white-space: wrap;
   overflow: auto;
+  text-align: left;
 }
 
 .submit {
+  margin: 10px;
   padding: 12px 20px;
   border: 2px solid var(--color-background);
   border-radius: var(--border-radius);
@@ -93,7 +105,7 @@ h1 {
 
 .result {
   min-width: 400px;
-  height: 350px;
+  height: 400px;
   border: 2px solid var(--color-font);
   border-radius: var(--border-radius);
   background-color: #f8f8f8;
@@ -127,20 +139,9 @@ li {
 /* AnalysisResult ends here */
 
 /* TextOutput starts here */
-.textoutput {
-  width: 100%;
-  min-width: 400px;
-  height: 350px;
-  padding: 20px;
-  border: 2px solid var(--color-font);
-  border-radius: var(--border-radius);
-  background-color: #f8f8f8;
-  font-size: 16px;
-  resize: none;
-}
 .highlighted {
   background-color: pink;
-  color: orange;
+  color: blue;
 }
 /* TextOutput starts here */
 

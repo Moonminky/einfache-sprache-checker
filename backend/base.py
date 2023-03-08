@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask_cors import CORS
-from textanalysis import check_text, highlights
+from textanalysis import check_text
 
 api = Flask(__name__)
 CORS(api)
@@ -12,12 +12,15 @@ def checks():
         response_body = {"checks": [], "text":"", "highlights": []}
     else:
         data = request.get_json()
-        print(data)
-        text = data.get('text', '')
+        print('data:', data)
+        text = data['text']['text']
+        level = data['text']['level']
         print('text in req', text)
+        check_results = check_text(text, level)
         response_body = {
-            "checks": check_text(text),
+            "checks": check_results[0],
             "text": text,
-            "highlights": highlights
+            "highlights": check_results[1]
     }
+    print("RESPONSE BODY:", response_body)
     return response_body
