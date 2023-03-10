@@ -85,6 +85,11 @@ h1 {
   text-align: left;
 }
 
+.textarea:empty:before {
+  content: attr(data-placeholder);
+  color: #999;
+}
+
 .submit {
   margin: 10px;
   padding: 12px 20px;

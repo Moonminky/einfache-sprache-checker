@@ -11,7 +11,7 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
     e.preventDefault();
 
     if (!text) {
-      toast.error('Please add some text!', {
+      toast.error('Bitte gib zuerst Text ein!', {
         position: "bottom-left",
         autoClose: 5000,
         hideProgressBar: true,
@@ -30,6 +30,7 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
     if (!submittedText || !highlights) {
       return "";
     } else {
+      console.log("highlights: ", highlights);
       //get indexed Highlights
       // initialize an empty array to hold the values
       let indexBasedHighlights = [];
@@ -93,7 +94,7 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
           const shouldHighlight =
             (highlightStartIndex === wordStartIndex &&
             highlightEndIndex === wordEndIndex - 1) ||
-            charBasedHighlights.includes(word.toLowerCase());
+            charBasedHighlights.includes(word);
           const className = shouldHighlight ? "highlighted" : "";
           let separator = "";
           if (/([\p{P}\p{Z}\p{M}]+)/u.test(trimmedWords[index + 1])) {
@@ -124,7 +125,20 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
       <div
         contentEditable={true}
         className="textarea"
-        onInput={e => setText(e.target.textContent.trim())}
+        onInput={(e) => {
+          const text = e.target.textContent;
+          const selection = window.getSelection();
+          const cursorOffset = selection.focusOffset;
+          const normalizedText = text.normalize('NFC').replace(/[\u0300-\u0302\u0304-\u036f]/g, '');
+          e.target.textContent = normalizedText;
+          const newRange = new Range();
+          newRange.setStart(selection.anchorNode, cursorOffset);
+          newRange.setEnd(selection.focusNode, cursorOffset);
+          selection.removeAllRanges();
+          selection.addRange(newRange);
+          setText(normalizedText);
+        }}       
+        data-placeholder="Gib hier deinen Text ein."
         dangerouslySetInnerHTML={{
           __html: renderText(submittedText, highlights)
         }}

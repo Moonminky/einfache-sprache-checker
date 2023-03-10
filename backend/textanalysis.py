@@ -3,7 +3,7 @@
 import re
 import spacy
 from spacy.morphology import Morphology
-
+import unicodedata
 import goethe_levels as levels
 
 nlp = spacy.load('de_core_news_sm')
@@ -80,6 +80,7 @@ def sentence_length_analysis(input_doc):
     global sentence_len_highlights
     sentence_len_highlights = []
     for sent in input_doc.sents:
+        print("sent: ", sent)
         length = len([token.text for token in sent if not token.is_punct])
         if length > 12:
             print("too long! ", (sent, sent.start_char,sent.end_char))
@@ -182,8 +183,7 @@ def make_highlights(neg_highlights, punctuation_highlights, goethe_highlights, n
              'punctuation_highlights': deduplicate_list(punctuation_highlights),
              'goethe_highlights': deduplicate_list(goethe_highlights),
              'num_highlights': deduplicate_list(num_highlights),
-             'subjunctive_highlights_2': deduplicate_list(subjunctive_highlights),
-             'passive_highlights_2': deduplicate_list(passive_highlights)
+             'subjunctive_highlights': deduplicate_list(subjunctive_highlights),
          }
          }
     ]
@@ -192,12 +192,13 @@ def make_highlights(neg_highlights, punctuation_highlights, goethe_highlights, n
 
 def check_text(text_input, level):
     """Run all checks, make highlights object & return checks list"""
-    doc = nlp(text_input.replace("\n", ""))
-    print("doc text: ", doc.text)
+    normalized_text = unicodedata.normalize('NFC', text_input)
+    doc = nlp(normalized_text.replace("\n", ""))
+    # print("doc text:", doc.text)
     # for token in doc:
     #     #print(token.text, spacy.explain(token.dep_), token.pos_, spacy.explain(token.tag_), token.lemma_, token.morph)
     #     print(token.text, spacy.explain(token.dep_))
-    # list for the strings to highlight
+    #list for the strings to highlight
     checks = [
         {
             'name': 'Goethe-Level',

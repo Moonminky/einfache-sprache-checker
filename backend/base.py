@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS
 from textanalysis import check_text
+import unicodedata
 
 api = Flask(__name__)
 CORS(api)
@@ -21,6 +22,6 @@ def checks():
             "checks": check_results[0],
             "text": text,
             "highlights": check_results[1]
-    }
+        }
     print("RESPONSE BODY:", response_body)
     return response_body
