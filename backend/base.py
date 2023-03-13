@@ -14,7 +14,7 @@ def checks():
     else:
         data = request.get_json()
         print('data:', data)
-        text = data['text']['text']
+        text = unicodedata.normalize('NFC', data['text']['normalizedText'])
         level = data['text']['level']
         print('text in req', text)
         check_results = check_text(text, level)

@@ -22,7 +22,7 @@ function App() {
       .then(data => {
         setChecks(data.checks);
         setTextResult(data.highlights);
-        setTextInput(data.text);
+        setTextInput(data.text.normalize('NFC').replace(/[\u0300-\u0302\u0304-\u036f]/g, ''));
       })
       .catch(error => {
         console.log(error);
@@ -44,7 +44,7 @@ function App() {
       .then(data => {
         setChecks(data.checks);
         setTextResult(data.highlights);
-        setTextInput(data.text);
+        setTextInput(data.text.normalize('NFC').replace(/[\u0300-\u0302\u0304-\u036f]/g, ''));
       })
       .catch(error => {
         console.log(error);

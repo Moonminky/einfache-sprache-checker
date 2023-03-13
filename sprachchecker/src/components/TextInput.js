@@ -22,7 +22,8 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
         theme: "dark",
         });
     } else {
-      onSend({ text, level });
+      const normalizedText = text.normalize('NFC').replace(/[\u0300-\u0302\u0304-\u036f]/g, '');
+      onSend({ normalizedText, level });
     }
   };
 
@@ -122,9 +123,12 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
           <option value="b1">B1</option>
         </select>
       </label>
+      <label>Gib hier deinen Text ein.
       <div
         contentEditable={true}
         className="textarea"
+        id="textinput"
+        data-testid="content-input"
         onInput={(e) => {
           const text = e.target.textContent;
           const selection = window.getSelection();
@@ -143,6 +147,7 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
           __html: renderText(submittedText, highlights)
         }}
       />
+      </label>
       <input className="submit" type="submit" value="Check" />
     </form>
   );

@@ -106,7 +106,7 @@ def language_level_analysis(input_doc, level):
     elif level == 'b1':
         level_words = levels.b1
     word_list = [
-        token.text for token in input_doc if not token.is_punct and not token.is_stop and token.text not in level_words]
+        token.text for token in input_doc if not token.is_punct and not token.is_stop and token.lemma_ not in level_words]
     print(level, "level word_list:", word_list)
     goethe_highlights.extend(word_list)
     print("goethe_highlights", goethe_highlights)
@@ -192,9 +192,10 @@ def make_highlights(neg_highlights, punctuation_highlights, goethe_highlights, n
 
 def check_text(text_input, level):
     """Run all checks, make highlights object & return checks list"""
-    normalized_text = unicodedata.normalize('NFC', text_input)
+    normalized_text = unicodedata.normalize('NFC', text_input).replace(u'\xa0', u' ')
+    print("nprmalized text:", normalized_text)
     doc = nlp(normalized_text.replace("\n", ""))
-    # print("doc text:", doc.text)
+    print("doc text:", doc.text)
     # for token in doc:
     #     #print(token.text, spacy.explain(token.dep_), token.pos_, spacy.explain(token.tag_), token.lemma_, token.morph)
     #     print(token.text, spacy.explain(token.dep_))
