@@ -59,9 +59,8 @@ h1 {
 /* header ends here */
 
 /* TextInput starts here */
-
 .glevel {
-  display:inline-block;
+  display: inline-block;
   padding: 12px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -104,10 +103,14 @@ h1 {
 .submit:hover {
   background-color: var(--color-hover);
 }
+
+.highlighted {
+  background-color: pink;
+  color: blue;
+}
 /* TextInput ends here */
 
 /* AnalysisResult starts here */
-
 .result {
   min-width: 400px;
   height: 400px;
@@ -121,7 +124,7 @@ ul {
   width: 100%;
   display: flex;
   flex-direction: column;
-  font-size: 1.5rem ;
+  font-size: 1.5rem;
 }
 
 DangerousIcon {
@@ -142,13 +145,6 @@ li {
   color: green;
 }
 /* AnalysisResult ends here */
-
-/* TextOutput starts here */
-.highlighted {
-  background-color: pink;
-  color: blue;
-}
-/* TextOutput starts here */
 
 /* Footer starts here */
 .footer {
