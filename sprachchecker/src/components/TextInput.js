@@ -31,9 +31,7 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
     if (!submittedText || !highlights) {
       return "";
     } else {
-      console.log("highlights: ", highlights);
       //get indexed Highlights
-      // initialize an empty array to hold the values
       let indexBasedHighlights = [];
       const indexBasedKeys = Object.keys(highlights[0]["index-based"]);
 
@@ -46,7 +44,6 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
       }
 
       //get character-based Highlights
-      // initialize an empty array to hold the values
       let charBasedHighlights = [];
       const charBasedKeys = Object.keys(highlights[1]["character-based"]);
 
@@ -58,18 +55,12 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
         charBasedHighlights.push(...cHighlightsArray);
       }
 
-
-      // log the arrays of values
-      console.log("indexbasedhighlights", indexBasedHighlights);
-      console.log("charBasedHighlights", charBasedHighlights);
-
       //make list of words to highlight
 
       // Split text into an array of words
       const words = submittedText.split(/([\p{P}\p{Z}\p{M}]+)/u);
       const filteredWords = words.filter(word => !/^\s*$/.test(word));
       const trimmedWords = filteredWords.map(str => str.replace(/\s/g, ""));
-      console.log("split& filtered & trimmed words: ", trimmedWords);
 
       // Map over words and add highlight class to highlighted words
       let currentIndex = 0;
