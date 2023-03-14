@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <p>
-        Developed with &#9749; by{" "}
+        Developed with &#127861; by{" "}
         <a
           href="https://github.com/Moonminky"
           target="_blank"

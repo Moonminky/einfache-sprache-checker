@@ -61,7 +61,7 @@ function App() {
       </header>
       <section className="textanalysis">
         {loading ? (
-          <TailSpin type="TailSpin" color="#00BFFF" height={80} width={80} />
+          <TailSpin type="TailSpin" color="#00BFFF" height={80} width={80} data-testid="spinner"/>
         ) : (
           <TextInput
             className="textinput"

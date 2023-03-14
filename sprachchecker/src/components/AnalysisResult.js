@@ -4,7 +4,7 @@ import Check from './Check'
 
 const AnalysisResult = ({ checks }) => {
   return (
-    <div className="result">
+    <div className="result" data-testid="analysis-result">
       <List>
       {checks.map((check) => (
                 <Check key={check.name} check={check} />
