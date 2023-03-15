@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import App from "./App";
 
 describe("App", () => {
@@ -15,6 +15,3 @@ describe("App", () => {
     expect(screen.getByTestId("analysis-result")).toBeInTheDocument();
   });
 });
-
-//TODO:  test if the runChecks method correctly updates the state with new data after a successful server call
-//TODO: test if the component can handle server errors correctly
