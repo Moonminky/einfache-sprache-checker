@@ -14,10 +14,13 @@ sentence_len_highlights = []
 subjunctive_highlights = []
 passive_highlights = []
 
+
 #  Check für Verneinung mit "nicht"
 def negation_analysis(input_text):
-    """This method takes in an input text and scans it for occurrences of the word 'nicht'.
-    If found, it adds the indices of the word to the highlight_words list, otherwise it returns false"""
+    """This method takes in an input text and scans it for
+    occurrences of the word 'nicht'. If found, it adds the
+    indices of the word to the highlight_words list,
+    otherwise it returns false"""
     global neg_highlights
     neg_highlights = []
     if "nicht" in input_text:
@@ -83,8 +86,8 @@ def sentence_length_analysis(input_doc):
         print("sent: ", sent)
         length = len([token.text for token in sent if not token.is_punct])
         if length > 12:
-            print("too long! ", (sent, sent.start_char,sent.end_char))
-            sentence_len_highlights.append((sent.start_char,sent.end_char))
+            print("too long! ", (sent, sent.start_char, sent.end_char))
+            sentence_len_highlights.append((sent.start_char, sent.end_char))
     # return sent_indices
     print("sentence_len_highlights", sentence_len_highlights)
     if len(sentence_len_highlights) > 0:
@@ -132,29 +135,29 @@ def subjunctive_analysis(input_doc):
 
 
 # Check für Passivsätze, not implemented
-def passive_analysis(input_doc):
-    """Takes in a spacy.doc and checks for any words with subjunctive mood. Returns a list of """
-    # passive_rule = [{'DEP': 'nsubjpass'}, {'DEP': 'aux', 'OP': '*'}, {'DEP': 'auxpass'}, {'TAG': 'VBN'}]
-    # matcher.add('Passive', None, passive_rule)
-   # matches = matcher(doc)
-    sent_indices = []
-    for sent in input_doc.sents:
-        print("ents:", sent.ents)
-        # extract morphological info for subject
-        subject = [token.morph for token in sent if token.dep_ == "sb"]
-        subject_num_pers = (subject[0].get("Number"), subject[0].get("Person"))
-        print("subject_num_pers: ", subject_num_pers)
-        # extract morphological info for possible auxiliary verb
-        verb = [token.morph for token in sent if token.pos_ == "AUX"]
-        verb_num_pers = (verb[0].get("Number"), verb[0].get("Person"))
-        print("verb_num_pers: ", verb_num_pers)
-        # when there is an auxiliary verb and it has a different person than subject, it should be passive
-        # token.dep_ = auxiliary für verb, sb
-        # length = len([token.text for token in sent if not token.is_punct])
-        # if length > 12:
-        #    print("Passive!", (sent, sent.start, sent.end))
-        #   sent_indices.append((sent.start, sent.end))
-    # return sent_indices
+# def passive_analysis(input_doc):
+#     """Takes in a spacy.doc and checks for any words with subjunctive mood. Returns a list of """
+#     # passive_rule = [{'DEP': 'nsubjpass'}, {'DEP': 'aux', 'OP': '*'}, {'DEP': 'auxpass'}, {'TAG': 'VBN'}]
+#     # matcher.add('Passive', None, passive_rule)
+#    # matches = matcher(doc)
+#     sent_indices = []
+#     for sent in input_doc.sents:
+#             print("ents:", sent.ents)
+#             # extract morphological info for subject
+#             subject = [token.morph for token in sent if token.dep_ == "sb"]
+#             subject_num_pers = (subject[0].get("Number"), subject[0].get("Person"))
+#             print("subject_num_pers: ", subject_num_pers)
+#             # extract morphological info for possible auxiliary verb
+#             verb = [token.morph for token in sent if token.pos_ == "AUX"]
+#             verb_num_pers = (verb[0].get("Number"), verb[0].get("Person"))
+#             print("verb_num_pers: ", verb_num_pers)
+#             # when there is an auxiliary verb and it has a different person than subject, it should be passive
+#             # token.dep_ = auxiliary für verb, sb
+#             # length = len([token.text for token in sent if not token.is_punct])
+#             # if length > 12:
+#             #    print("Passive!", (sent, sent.start, sent.end))
+#             #   sent_indices.append((sent.start, sent.end))
+#     # return sent_indices
 
 
 def deduplicate_list(to_dedup):
@@ -192,14 +195,15 @@ def make_highlights(neg_highlights, punctuation_highlights, goethe_highlights, n
 
 def check_text(text_input, level):
     """Run all checks, make highlights object & return checks list"""
-    normalized_text = unicodedata.normalize('NFC', text_input).replace(u'\xa0', u' ')
+    normalized_text = unicodedata.normalize(
+        'NFC', text_input).replace(u'\xa0', u' ')
     print("nprmalized text:", normalized_text)
     doc = nlp(normalized_text.replace("\n", ""))
     print("doc text:", doc.text)
     # for token in doc:
     #     #print(token.text, spacy.explain(token.dep_), token.pos_, spacy.explain(token.tag_), token.lemma_, token.morph)
     #     print(token.text, spacy.explain(token.dep_))
-    #list for the strings to highlight
+    # list for the strings to highlight
     checks = [
         {
             'name': 'Goethe-Level',

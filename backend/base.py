@@ -7,10 +7,11 @@ import unicodedata
 api = Flask(__name__)
 CORS(api)
 
-@api.route('/checks',  methods=['GET','POST'])
+
+@api.route('/checks',  methods=['GET', 'POST'])
 def checks():
     if request.method == 'GET':
-        response_body = {"checks": [], "text":"", "highlights": []}
+        response_body = {"checks": [], "text": "", "highlights": []}
     else:
         data = request.get_json()
         print('data:', data)
