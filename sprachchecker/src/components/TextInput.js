@@ -109,11 +109,12 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
           value={level}
           onChange={e => setLevel(e.target.value)}
         >
-          <option value="a1">A1</option>
-          <option value="a2">A2</option>
-          <option value="b1">B1</option>
+          <option value="a1">Deutsch A1</option>
+          <option value="a2">Deutsch A2</option>
+          <option value="b1">Deutsch B1</option>
         </select>
       </label>
+      <div className="textandlabel">
       <label>Gib hier deinen Text ein.
       <div
         contentEditable={true}
@@ -139,6 +140,7 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
         }}
       />
       </label>
+      </div>
       <input className="submit" type="submit" value="Check" />
     </form>
   );

@@ -35,14 +35,26 @@ body {
 }
 
 .textanalysis {
-  margin: 20px 20px;
+  margin: 0 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  padding-bottom: 5rem;
-  padding-top: 3rem;
+  padding-bottom: 20px;
+}
+
+form * {
+  width: 100%;
+}
+
+select {
+  color: var(--color-font);
+  border: 2px solid var(--color-font);
+  border-radius: 12px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  padding: 5px;
 }
 /* reset code and common ends here */
 
@@ -51,6 +63,7 @@ body {
   background-color: var(--color-font);
   color: var(--color-background);
   width: 100%;
+  height: fit-content;
 }
 h1 {
   margin: 20px;
@@ -65,7 +78,16 @@ h1 {
   font-size: 16px;
   cursor: pointer;
   justify-items: center;
-  justify-self: flex-start;
+}
+
+.textandlabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.textandlabel label {
+  flex-basis: 100%;
 }
 
 .textarea {
@@ -90,7 +112,7 @@ h1 {
 }
 
 .submit {
-  margin: 10px;
+  margin: auto;
   padding: 12px 20px;
   border: 2px solid var(--color-background);
   border-radius: var(--border-radius);
@@ -162,3 +184,25 @@ li {
   color: #f5d5d5;
 }
 /* Footer ends here */
+
+/* Media queries start here */
+
+@media (max-width: 600px) {
+  form,
+  .result,
+  .submit {
+    display: block;
+    width: 90%;
+    min-width: 250px;
+    max-width: 100%;
+    margin: auto;
+  }
+
+  .textanalysis {
+    padding-bottom: 100px;
+  }
+
+  .footer {
+    height: fit-content;
+  }
+}
