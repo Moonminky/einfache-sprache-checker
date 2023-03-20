@@ -59,7 +59,7 @@ function App() {
       <header className="header">
         <h1>Einfache Sprache Quick-Check</h1>
       </header>
-      <section className="textanalysis">
+      <section className="textanalysis" role="main">
         {loading ? (
           <TailSpin type="TailSpin" color="#00BFFF" height={80} width={80} data-testid="spinner"/>
         ) : (

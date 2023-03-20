@@ -102,10 +102,11 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <ToastContainer/>
-      <label className="glevel">
+      <ToastContainer role="warning"/>
+      <label className="glevel" htmlFor="levelselect">
         Wähle das Sprachlevel:{' '}
         <select
+          id="levelselect"
           value={level}
           onChange={e => setLevel(e.target.value)}
         >
@@ -115,7 +116,7 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
         </select>
       </label>
       <div className="textandlabel">
-      <label>Gib hier deinen Text ein.
+      <label htmlFor="textinput">Gib hier deinen Text ein.
       <div
         contentEditable={true}
         className="textarea"
