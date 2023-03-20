@@ -7,7 +7,7 @@ At the moment, the tool can check for compliance with the following of those rul
 - **Keine Konjunktive** (no subjunctive)
 - **Nur Punkt, Komma, und Doppelpunkt als Satzzeichen** (only ".", ",", and ":" for punctuation)
 - **Zahlen immer als Ziffer** (writing numbers as numbers and not as words)
-- **einfacher Wortschatz** (the tool allows for selection of the language levels A1, A2, or B1 by the Goethe Institut to check if easy enough words are used)
+- **einfacher Wortschatz** (only using simple words, the tool allows for selection of the language levels A1, A2, or B1 by the Goethe Institut to check if easy enough words are used)
 
 # Architecture
 
