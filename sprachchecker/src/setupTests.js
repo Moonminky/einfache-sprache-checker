@@ -3,12 +3,12 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
-import { server } from "./mocks/server";
+// import { server } from "./mocks/server";
 
-beforeAll(() => server.listen({
-    onUnhandleRequest: 'error'
-}));
+// beforeAll(() => server.listen({
+//     onUnhandleRequest: 'error'
+// }));
 
-afterEach(() => server.resetHandlers());
+// afterEach(() => server.resetHandlers());
 
-afterAll(() => server.close());
+// afterAll(() => server.close());
