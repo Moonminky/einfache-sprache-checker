@@ -1,11 +1,11 @@
 from flask import Flask
 from flask import request
-from flask_cors import CORS
+# from flask_cors import CORS
 from textanalysis import check_text
 import unicodedata
 
 api = Flask(__name__)
-CORS(api)
+# CORS(api)
 
 
 @api.route('/checks',  methods=['GET', 'POST'])
