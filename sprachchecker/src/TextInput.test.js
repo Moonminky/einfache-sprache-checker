@@ -46,7 +46,7 @@ describe("TextInput", () => {
 
     // Check if the toast error message element is present in the DOM
     await waitFor(() => {
-      const toast = screen.getByRole("alert");
+      const toast = screen.getByRole("warning");
       expect(toast).toHaveTextContent("Bitte gib zuerst Text ein!");
     });
   });
