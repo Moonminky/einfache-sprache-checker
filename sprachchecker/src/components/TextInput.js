@@ -102,7 +102,7 @@ const TextInput = ({ onSend, submittedText, highlights }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <ToastContainer/>
+      <ToastContainer role="warning"/>
       <label className="glevel" htmlFor="levelselect">
         Wähle das Sprachlevel:{' '}
         <select
