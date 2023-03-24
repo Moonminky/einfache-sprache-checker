@@ -3,11 +3,9 @@ from flask import request
 # from flask_cors import CORS
 from textanalysis import check_text
 import unicodedata
-import os
 
-api = Flask(__name__))
-os.environ['HOST'] = 'einfache-sprache-checker.up.railway.app'
-api.config['SERVER_NAME'] = os.environ.get('HOST', 'localhost')
+api = Flask(__name__)
+api.config['SERVER_NAME'] = 'https://einfache-sprache-checker.up.railway.app'
 # CORS(api)
 
 @api.errorhandler(404)
