@@ -45,5 +45,6 @@
   },
   "devDependencies": {
     "@axe-core/react": "^4.6.0"
-  }
+  },
+  "proxy": "https://einfache-sprache-checker.up.railway.app"
 }
