@@ -12,7 +12,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const url = '/checks';
+    const url = '/checks/checks';
     console.log('API endpoint url:', url);
     fetch(url, {
       methods: "GET",
@@ -34,7 +34,7 @@ function App() {
   //run checks
   const runChecks = (text, level) => {
     setLoading(true);
-    const url = '/checks';
+    const url = '/checks/checks';
     console.log('API endpoint url:', url);
     fetch(url, {
       method: "POST",
