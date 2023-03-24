@@ -12,7 +12,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/checks", {
+    fetch("http://localhost:5587/checks", {
       methods: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -32,7 +32,7 @@ function App() {
   //run checks
   const runChecks = (text, level) => {
     setLoading(true);
-    fetch("http://localhost:5000/checks", {
+    fetch("http://localhost:5587/checks", {
       method: "POST",
       headers: {
         Accept: "application/json",
