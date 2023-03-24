@@ -32,7 +32,9 @@ function App() {
   //run checks
   const runChecks = (text, level) => {
     setLoading(true);
-    fetch("/checks", {
+    const url = '/checks';
+    console.log('API endpoint url:', url);
+    fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/json",
