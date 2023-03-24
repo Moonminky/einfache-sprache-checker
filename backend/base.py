@@ -5,7 +5,7 @@ from textanalysis import check_text
 import unicodedata
 import os
 
-api = Flask(__name__, static_folder='../build', static_url_path='/')
+api = Flask(__name__, static_folder='../build', static_url_path='/checks')
 os.environ['HOST'] = 'einfache-sprache-checker.up.railway.app'
 api.config['SERVER_NAME'] = os.environ.get('HOST', 'localhost')
 # CORS(api)
