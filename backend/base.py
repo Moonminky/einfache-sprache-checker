@@ -5,14 +5,10 @@ from textanalysis import check_text
 import unicodedata
 import os
 
-api = Flask(__name__, static_folder='../build', static_url_path='/checks')
+api = Flask(__name__))
 os.environ['HOST'] = 'einfache-sprache-checker.up.railway.app'
 api.config['SERVER_NAME'] = os.environ.get('HOST', 'localhost')
 # CORS(api)
-
-# @api.route('/')
-# def index():
-#     return api.send_static_file('index.html')
 
 @api.errorhandler(404)
 def not_found(e):
