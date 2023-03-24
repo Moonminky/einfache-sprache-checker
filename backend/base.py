@@ -4,7 +4,7 @@ from flask import request
 from textanalysis import check_text
 import unicodedata
 
-api = Flask(__name__, static_folder='../build', static_url_path='/')
+api = Flask(__name__, static_folder='../build')
 # CORS(api)
 
 # @api.route('/')
