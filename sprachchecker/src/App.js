@@ -12,7 +12,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    onst url = '/checks';
+    const url = '/checks';
     console.log('API endpoint url:', url);
     fetch(url, {
       methods: "GET",
