@@ -7,9 +7,13 @@ import unicodedata
 api = Flask(__name__, static_folder='../build', static_url_path='/')
 # CORS(api)
 
-@api.route('/')
-def index():
-    return api.send_static_file('index.html')
+# @api.route('/')
+# def index():
+#     return api.send_static_file('index.html')
+
+@api.errorhandler(404)
+def not_found(e):
+    return {"checks": [], "text": "", "highlights": []}
 
 @api.route('/checks',  methods=['GET', 'POST'])
 def checks():
