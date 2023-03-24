@@ -4,9 +4,12 @@ from flask import request
 from textanalysis import check_text
 import unicodedata
 
-api = Flask(__name__)
+api = Flask(__name__, static_folder='../build', static_url_path='/')
 # CORS(api)
 
+@api.route('/')
+def index():
+    return api.send_static_file('index.html')
 
 @api.route('/checks',  methods=['GET', 'POST'])
 def checks():
