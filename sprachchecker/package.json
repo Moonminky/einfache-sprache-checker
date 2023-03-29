@@ -2,6 +2,7 @@
   "name": "sprachchecker",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://einfache-sprache-checker.up.railway.app/",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -18,6 +19,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
+    "deploy": "npm run deploy",
     "start": "react-scripts start",
     "start-api": "cd backend && flask run --no-debugger",
     "build": "react-scripts build",
