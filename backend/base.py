@@ -1,10 +1,10 @@
 from flask import Flask
 from flask import request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from textanalysis import check_text
 import unicodedata
 
-api = Flask(__name__, static_folder='../build')
+api = Flask(__name__, static_folder='../build', static_url_path='')
 api.config['SERVER_NAME'] = 'https://einfache-sprache-checker.up.railway.app'
 CORS(api)
 
@@ -13,6 +13,7 @@ def not_found(e):
     return {"checks": [], "text": "", "highlights": []}
 
 @api.route('/checks',  methods=['GET', 'POST'])
+@cross_origin()
 def checks():
     if request.method == 'GET':
         response_body = {"checks": [], "text": "", "highlights": []}
@@ -30,3 +31,8 @@ def checks():
         }
     print("RESPONSE BODY:", response_body)
     return response_body
+
+@api.route('/')
+@cross_origin()
+def serve():
+    return send_from_directory(api.static_folder, 'index-html')
